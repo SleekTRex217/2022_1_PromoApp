@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Utility App Center</string>
+
+    <string name="rb_Cell">Cell</string>
+    <string name="rb_Home">Home</string>
+
+    <string name="txtNomeHintPhone">Enter here number your Phone: </string>
+
+    <string-array name="tipolog">
+        <item>Select Type Address</item>
+    </string-array>
+</resources>

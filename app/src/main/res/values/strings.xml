@@ -1,12 +1,38 @@
 <resources>
-    <string name="app_name">Utility App Center</string>
+    <string name="app_name">Utility Center App</string>
 
     <string name="rb_Cell">Cell</string>
     <string name="rb_Home">Home</string>
 
-    <string name="txtNomeHintPhone">Enter here number your Phone: </string>
+    <string name="txtNomeHintPhone">Enter here number phone: </string>
+    <string name="txtNomeHintName">Enter here your name: </string>
+    <string name="txtNomeHintAddress">Enter here your address: </string>
+    <string name="txtNomeHintNumber">Nº</string>
+    <string name="txtNomeHintComplemento">Address complement</string>
+    <string name="txtNomeHintBairro">Enter your neighborhood: </string>
+    <string name="txtNomeHintUF">UF</string>
+    <string name="txtNomeHintCidade">City</string>
+
+    <string name="txAddressType">Select type address</string>
+<!--    <string name="spFarmacia">Select the Pharmacy you want to receive</string>-->
+<!--    <string name="spMercado">Select the Market you want to receive</string>-->
+<!--    <string name="spUtilidades">Select the Utility Store you want to receive</string>-->
+
+    <string name="confirmacao">Select below the promotions you would like to receive: </string>
+
+    <string name="btnSalvar">Save</string>
+    <string name="btnAdicionar">Add</string>
 
     <string-array name="tipolog">
-        <item>Select Type Address</item>
+        <item>Select</item>
+    </string-array>
+    <string-array name="farma">
+        <item>Select the Pharmacy you want to receive</item>
+    </string-array>
+    <string-array name="merc">
+        <item>Select the Market you want to receive</item>
+    </string-array>
+    <string-array name="util">
+        <item>Select the Utility Store you want to receive</item>
     </string-array>
 </resources>

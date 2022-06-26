@@ -29,9 +29,9 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="90dp"
                 android:layout_gravity="right"
-                android:src="@drawable/VERIMAGEM" />
+                android:src="@drawable/utility" />
 
         </LinearLayout>
 
@@ -41,55 +41,234 @@
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Digite o seu nome completo"
+        android:hint="@string/txtNomeHintName"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/etTelefone"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="@string/txtNomeHintPhone"
-        android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/formulario"/>
 
-    <RadioGroup
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/rgCl">
-        <RadioButton
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/rb_Cell"
-            android:id="@+id/rbSim"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <RadioButton
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/rb_Home"
-            android:id="@+id/rbNao"/>
-    </RadioGroup>
+        <EditText
+            android:id="@+id/etTelefone"
+            android:layout_width="354dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:ems="10"
+            android:hint="@string/txtNomeHintPhone"
+            android:inputType="phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/formulario"/>
 
-    <Spinner
-        android:id="@+id/spTipoLog"
-        android:layout_width="match_parent"
-        android:layout_height="29dp"
-        android:layout_marginTop="32dp"
-        android:entries="@array/tipolog"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNome" />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/rgCl">
+        <RadioButton
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/rb_Cell"
+                android:id="@+id/rbSim" />
+
+            <RadioButton
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/rb_Home"
+                android:id="@+id/rbNao"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/typeAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txAddressType"
+                android:ems="10"
+                android:padding="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <Spinner
+                    android:id="@+id/spTipoLog"
+                    android:layout_width="108dp"
+                    android:layout_height="29dp"
+                    android:layout_marginTop="1dp"
+                    android:entries="@array/tipolog"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.571"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/typeAddress" />
+
+                <EditText
+                    android:id="@+id/etEndereco"
+                    style="@style/formulario"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/txtNomeHintAddress"
+                    android:inputType="textCapWords"
+                    android:padding="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etNumero"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:hint="@string/txtNomeHintNumber"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/formulario" />
+
+            <EditText
+                android:id="@+id/etComplemento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:hint="@string/txtNomeHintComplemento"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/formulario" />
+
+        </LinearLayout>
+
+            <EditText
+                android:id="@+id/etBairro"
+                android:layout_width="354dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:hint="@string/txtNomeHintBairro"
+                android:inputType="phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/formulario" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etEstado"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:hint="@string/txtNomeHintUF"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/formulario" />
+
+            <EditText
+                android:id="@+id/etCidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:hint="@string/txtNomeHintCidade"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/formulario" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/confirmacao"
+            android:textSize="15dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_marginBottom="5dp"
+            android:padding="10dp"
+            android:layout_gravity="bottom" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spFarmacia"
+            android:entries="@array/farma"
+            android:padding="12dp"
+            android:layout_centerInParent="true"
+            android:drawablePadding="16dp"
+            android:layout_marginBottom="8dp"
+            android:drawableEnd="@android:drawable/arrow_down_float"
+            android:background="@android:drawable/editbox_background" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spMercado"
+            android:entries="@array/merc"
+            android:padding="12dp"
+            android:layout_centerInParent="true"
+            android:drawablePadding="16dp"
+            android:layout_marginBottom="8dp"
+            android:drawableEnd="@android:drawable/arrow_down_float"
+            android:background="@android:drawable/editbox_background" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spUtilidades"
+            android:entries="@array/util"
+            android:padding="12dp"
+            android:layout_centerInParent="true"
+            android:drawablePadding="16dp"
+            android:layout_marginBottom="8dp"
+            android:drawableEnd="@android:drawable/arrow_down_float"
+            android:background="@android:drawable/editbox_background" />
+
+        <Button
+            android:id="@+id/btnSalvar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:text="@string/btnSalvar"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spUtilidades" />
 
     </LinearLayout>
 

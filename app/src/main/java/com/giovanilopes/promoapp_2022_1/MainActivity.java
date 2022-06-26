@@ -2,13 +2,161 @@ package com.giovanilopes.promoapp_2022_1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.UiAutomation;
+import android.opengl.EGLObjectHandle;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText etNome, etTelefone, etEndereco, etNumero, etComplemento, etBairro, etEstado, etCidade;
+    private Spinner spFarmacia, spMercado, spUtilidades, spTipoLog;
+    private Button btnSalvar;
+    private String action;
+    private Cadastro cadastro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        spTipoLog = findViewById(R.id.spTipoLog);
+        etNome = findViewById(R.id.etNome);
+        etTelefone = findViewById(R.id.etTelefone);
+        etEndereco = findViewById(R.id.etEndereco);
+        etNumero = findViewById(R.id.etNumero);
+        etComplemento = findViewById(R.id.etComplemento);
+        etBairro = findViewById(R.id.etBairro);
+        etEstado = findViewById(R.id.etEstado);
+        etCidade = findViewById(R.id.etCidade);
+        spFarmacia = findViewById(R.id.spFarmacia);
+        spMercado = findViewById(R.id.spMercado);
+        spUtilidades = findViewById(R.id.spUtilidades);
+        btnSalvar = findViewById(R.id.btnSalvar);
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                salvar();
+            }
+        });
+        carregarFarmacias();
+        carregarMercados();
+        carregarLojas();
+
+        action = getIntent().getExtras().getString("action");
+        if (action.equals("edit")) {
+            cadastro = new Cadastro();
+            cadastro.setId(getIntent().getExtras().getString("idCliente"));
+            etNome.setText(getIntent().getExtras().getString("nome"));
+            etTelefone.setText(getIntent().getExtras().getString("telefone"));
+            etEndereco.setText(getIntent().getExtras().getString("endereco"));
+            etNumero.setText(getIntent().getExtras().getString("numero"));
+            etComplemento.setText(getIntent().getExtras().getString("complemento"));
+            etBairro.setText(getIntent().getExtras().getString("bairro"));
+            etEstado.setText(getIntent().getExtras().getString("uf"));
+            etCidade.setText(getIntent().getExtras().getString("cidade"));
+        }
     }
+
+    private void salvar() {
+        if (action.equals("adicionar")) {
+            cadastro = new Cadastro();
+        }
+        String nome = etNome.getText().toString();
+        if (!nome.isEmpty() && spTipoLog.getSelectedItemPosition() > 0) {
+            cadastro.setNome(nome);
+            cadastro.setTelefone(etTelefone.getText().toString());
+            cadastro.setTipoEndereco((TipoEndereco) spTipoLog.getSelectedItem());
+            cadastro.setEndereco(etEndereco.getText().toString());
+            cadastro.setNumero(etNumero.getText().toString());
+            cadastro.setComplemento(etComplemento.getText().toString());
+            cadastro.setBairro(etBairro.getText().toString());
+            cadastro.setUf(etEstado.getText().toString());
+            cadastro.setCidade(etCidade.getText().toString());
+            cadastro.setFarmacia((Farmacia) spFarmacia.getSelectedItem());
+            cadastro.setMercado((Mercado) spMercado.getSelectedItem());
+            cadastro.setUtilidades((Utilidades) spUtilidades.getSelectedItem());
+
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference reference = database.getReference();
+            if (action.equals("adicionar")) {
+                reference.child("clientes").push().setValue(cadastro);
+            } else {
+                reference.child("clientes").child(cadastro.getId()).setValue(cadastro);
+            }
+            finish();
+        }
+    }
+
+    private void carregarFarmacias() {
+        Farmacia falso = new Farmacia("0", "Select the Pharmacy");
+        Farmacia agafarma = new Farmacia("1", "Agafarma");
+        Farmacia associadas = new Farmacia("2", "Associadas");
+        Farmacia drogaraia = new Farmacia("3", "Droga Raia");
+        Farmacia panvel = new Farmacia("4", "Panvel");
+        Farmacia saojoao = new Farmacia("5", "São João");
+
+        List<Farmacia> listaFarmacia = new ArrayList<>();
+        listaFarmacia.add(falso);
+        listaFarmacia.add(agafarma);
+        listaFarmacia.add(associadas);
+        listaFarmacia.add(drogaraia);
+        listaFarmacia.add(panvel);
+        listaFarmacia.add(saojoao);
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listaFarmacia);
+        spFarmacia.setAdapter(adapter);
+    }
+
+    private void carregarMercados() {
+        Mercado falso = new Mercado("0", "Select the Market");
+        Mercado asun = new Mercado("1", "Asun");
+        Mercado carrefour = new Mercado("2", "Carrefour");
+        Mercado maxxi = new Mercado("3", "Maxxi Atacado");
+        Mercado rissul = new Mercado("4", "Supper Rissul");
+        Mercado zaffari = new Mercado("5", "Zaffari");
+
+        List<Mercado> listaMercado = new ArrayList<>();
+        listaMercado.add(falso);
+        listaMercado.add(asun);
+        listaMercado.add(carrefour);
+        listaMercado.add(maxxi);
+        listaMercado.add(rissul);
+        listaMercado.add(zaffari);
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listaMercado);
+        spMercado.setAdapter(adapter);
+    }
+
+    private void carregarLojas() {
+        Utilidades falso = new Utilidades("0","Select the Utility Store");
+        Utilidades benoit = new Utilidades("1","Benoit");
+        Utilidades lebes = new Utilidades("2","Lebes");
+        Utilidades colombo = new Utilidades("3","Lojas Colombo");
+        Utilidades magalu = new Utilidades("4","Magazine Luiza");
+        Utilidades taqi = new Utilidades("5","TaQi");
+
+        List<Utilidades> listaLojas = new ArrayList<>();
+        listaLojas.add(falso);
+        listaLojas.add(benoit);
+        listaLojas.add(lebes);
+        listaLojas.add(colombo);
+        listaLojas.add(magalu);
+        listaLojas.add(taqi);
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listaLojas);
+        spUtilidades.setAdapter(adapter);
+    }
+
 }

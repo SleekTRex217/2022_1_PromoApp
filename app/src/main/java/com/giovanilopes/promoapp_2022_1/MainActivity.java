@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 salvar();
             }
         });
+        carregarTipoEndereco();
         carregarFarmacias();
         carregarMercados();
         carregarLojas();
@@ -97,6 +98,26 @@ public class MainActivity extends AppCompatActivity {
             }
             finish();
         }
+    }
+
+    private void carregarTipoEndereco() {
+        TipoEndereco falso = new TipoEndereco("0", "Select");
+        TipoEndereco alameda = new TipoEndereco("1", "Alameda/Avenue");
+        TipoEndereco avenida = new TipoEndereco("2", "Avenida/Avenue");
+        TipoEndereco rua = new TipoEndereco("3", "Rua/Street");
+        TipoEndereco travessa = new TipoEndereco("4", "Travessa/Lane");
+        TipoEndereco outros = new TipoEndereco("5", "Outros/Others");
+
+        List<TipoEndereco> listaTipoEndereco = new ArrayList<>();
+        listaTipoEndereco.add(falso);
+        listaTipoEndereco.add(alameda);
+        listaTipoEndereco.add(avenida);
+        listaTipoEndereco.add(rua);
+        listaTipoEndereco.add(travessa);
+        listaTipoEndereco.add(outros);
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listaTipoEndereco);
+        spTipoLog.setAdapter(adapter);
     }
 
     private void carregarFarmacias() {

@@ -30,7 +30,7 @@ public class PromoActivity extends AppCompatActivity {
     private List<Cadastro> listaCadastro = new ArrayList<>();
     private ArrayAdapter adapter;
 
-    FirebaseDatabase db;
+    FirebaseDatabase database;
     DatabaseReference reference;
     ChildEventListener childEventListener;
     Query query;
@@ -39,8 +39,8 @@ public class PromoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promo);
 
-        db = FirebaseDatabase.getInstance();
-        reference = db.getReference();
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference();
 
         lvCadastro = findViewById(R.id.lvCadastro);
         btnAdicionar = findViewById(R.id.btnAdicionar);

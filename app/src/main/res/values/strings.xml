@@ -22,6 +22,7 @@
 
     <string name="btnSalvar">Save</string>
     <string name="btnAdicionar">Add</string>
+    <string name="btnRemover">Remove</string>
 
     <string-array name="tipolog">
         <item>Select</item>

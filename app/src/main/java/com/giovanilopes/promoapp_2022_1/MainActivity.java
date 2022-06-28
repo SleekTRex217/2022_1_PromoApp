@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnSalvar;
     private String action;
     private Cadastro cadastro;
+    private RadioGroup rgCl;
+    private RadioButton rbCell, rbHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         spTipoLog = findViewById(R.id.spTipoLog);
         etNome = findViewById(R.id.etNome);
         etTelefone = findViewById(R.id.etTelefone);
+        rgCl = findViewById(R.id.rgCl);
+        rbCell = findViewById(R.id.rbCell);
+        rbHome = findViewById(R.id.rbHome);
         etEndereco = findViewById(R.id.etEndereco);
         etNumero = findViewById(R.id.etNumero);
         etComplemento = findViewById(R.id.etComplemento);
@@ -77,6 +84,13 @@ public class MainActivity extends AppCompatActivity {
         String nome = etNome.getText().toString();
         if (!nome.isEmpty() && spTipoLog.getSelectedItemPosition() > 0) {
             cadastro.setNome(nome);
+            int radioButtonReg =rgCl.getCheckedRadioButtonId();
+            String rdCheck = ((RadioButton) findViewById(radioButtonReg)).getText().toString();
+                if(rdCheck.equals("Cell")){
+                    cadastro.tipoTel = "Cell";
+                } else {
+                    cadastro.tipoTel = "Home";
+                }
             cadastro.setTelefone(etTelefone.getText().toString());
             cadastro.setTipoEndereco((TipoEndereco) spTipoLog.getSelectedItem());
             cadastro.setEndereco(etEndereco.getText().toString());

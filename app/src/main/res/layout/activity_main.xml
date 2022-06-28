@@ -77,13 +77,13 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="@string/rb_Cell"
-                android:id="@+id/rbSim" />
+                android:id="@+id/rbCell" />
 
             <RadioButton
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="@string/rb_Home"
-                android:id="@+id/rbNao"/>
+                android:id="@+id/rbHome"/>
         </RadioGroup>
 
     </LinearLayout>

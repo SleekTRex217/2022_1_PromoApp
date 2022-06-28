@@ -26,7 +26,7 @@ import java.util.List;
 public class PromoActivity extends AppCompatActivity {
 
     private ListView lvCadastro;
-    private Button btnAdicionar;
+    private Button btnAdicionar, btnRemover;
     private List<Cadastro> listaCadastro = new ArrayList<>();
     private ArrayAdapter adapter;
 
@@ -44,6 +44,7 @@ public class PromoActivity extends AppCompatActivity {
 
         lvCadastro = findViewById(R.id.lvCadastro);
         btnAdicionar = findViewById(R.id.btnAdicionar);
+        btnRemover = findViewById(R.id.btnRemover);
 
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +54,16 @@ public class PromoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnRemover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PromoActivity.this, MainActivity.class);
+                intent.putExtra("action", "remover");
+                startActivity(intent);
+            }
+        });
+
         lvCadastro.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 Cadastro cadastroSelect = listaCadastro.get(position);
@@ -61,6 +72,7 @@ public class PromoActivity extends AppCompatActivity {
                 intent.putExtra("action","edit");
                 intent.putExtra("idCliente", cadastroSelect.getId());
                 intent.putExtra("nome", cadastroSelect.getNome());
+                intent.putExtra("tipoTel", cadastroSelect.getTipoTel());
                 intent.putExtra("telefone", cadastroSelect.getTelefone());
                 intent.putExtra("endereco", cadastroSelect.getEndereco());
                 intent.putExtra("numero", cadastroSelect.getNumero());
@@ -85,6 +97,7 @@ public class PromoActivity extends AppCompatActivity {
                 Cadastro c = new Cadastro();
                 c.setId(snapshot.getKey());
                 c.setNome(snapshot.child("nome").getValue(String.class));
+                c.setTipoTel(snapshot.child("tipoTel").getValue(String.class));
                 c.setTelefone(snapshot.child("telefone").getValue(String.class));
                 c.setTipoEndereco(snapshot.child("tipoEndereco").getValue(TipoEndereco.class));
                 c.setEndereco(snapshot.child("endereco").getValue(String.class));
@@ -106,6 +119,7 @@ public class PromoActivity extends AppCompatActivity {
                 for(Cadastro c : listaCadastro){
                     if(c.getId().equals(idCliente)){
                         c.setNome(snapshot.child("nome").getValue(String.class));
+                        c.setTipoTel(snapshot.child("tipoTel").getValue(String.class));
                         c.setTelefone(snapshot.child("telefone").getValue(String.class));
                         c.setTipoEndereco(snapshot.child("tipoEndereco").getValue(TipoEndereco.class));
                         c.setEndereco(snapshot.child("endereco").getValue(String.class));

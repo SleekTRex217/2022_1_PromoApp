@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Utility Center App</string>
+
+    <string name="rb_Cell">Celular</string>
+    <string name="rb_Home">Residencial</string>
+
+    <string name="txtNomeHintPhone">Ingrese aquí número de teléfono: </string>
+    <string name="txtNomeHintName">Ingrese aquí su nombre: </string>
+    <string name="txtNomeHintAddress">Ingrese aquí su dirección: </string>
+    <string name="txtNomeHintNumber">Nº</string>
+    <string name="txtNomeHintComplemento">Complemento de dirección</string>
+    <string name="txtNomeHintBairro">Ingresa a tu barrio: </string>
+    <string name="txtNomeHintUF">UF</string>
+    <string name="txtNomeHintCidade">Ciudad</string>
+
+    <string name="txAddressType">Seleccionar tipo de dirección</string>
+
+    <string name="confirmacao">Selecciona a continuación las promociones que te gustaría recibir: </string>
+
+    <string name="btnSalvar">Guardar</string>
+    <string name="btnAdicionar">Agregar</string>
+
+    <string-array name="tipolog">
+        <item>Seleccione</item>
+    </string-array>
+    <string-array name="farma">
+        <item>Seleccione la Farmacia que desea recibir</item>
+    </string-array>
+    <string-array name="merc">
+        <item>Seleccione el Mercado que desea recibir</item>
+    </string-array>
+    <string-array name="util">
+        <item>Selecciona la Tienda de Utilidades que deseas recibir</item>
+    </string-array>
+</resources>

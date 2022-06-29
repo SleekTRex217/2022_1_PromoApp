@@ -2,12 +2,14 @@ package com.giovanilopes.promoapp_2022_1;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,7 +32,7 @@ public class PromoActivity extends AppCompatActivity {
     private List<Cadastro> listaCadastro = new ArrayList<>();
     private ArrayAdapter adapter;
 
-    FirebaseDatabase db;
+    FirebaseDatabase database;
     DatabaseReference reference;
     ChildEventListener childEventListener;
     Query query;
@@ -39,8 +41,8 @@ public class PromoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promo);
 
-        db = FirebaseDatabase.getInstance();
-        reference = db.getReference();
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference();
 
         lvCadastro = findViewById(R.id.lvCadastro);
         btnAdicionar = findViewById(R.id.btnAdicionar);
@@ -53,6 +55,7 @@ public class PromoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         lvCadastro.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 Cadastro cadastroSelect = listaCadastro.get(position);
@@ -61,6 +64,7 @@ public class PromoActivity extends AppCompatActivity {
                 intent.putExtra("action","edit");
                 intent.putExtra("idCliente", cadastroSelect.getId());
                 intent.putExtra("nome", cadastroSelect.getNome());
+                intent.putExtra("tipoTel", cadastroSelect.getTipoTel());
                 intent.putExtra("telefone", cadastroSelect.getTelefone());
                 intent.putExtra("endereco", cadastroSelect.getEndereco());
                 intent.putExtra("numero", cadastroSelect.getNumero());
@@ -71,6 +75,30 @@ public class PromoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        lvCadastro.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                excluir(position);
+                return true;
+            }
+        });
+    }
+
+    private void excluir(int posicao){
+        Cadastro cadastro = listaCadastro.get( posicao );
+        AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+        alerta.setTitle("Exclusão de Cadastro");
+        alerta.setIcon(android.R.drawable.ic_delete);
+        alerta.setMessage("Tem certeza que deseja excluir o cadastro de " + cadastro.getNome() +"?");
+        alerta.setNeutralButton("Cancelar", null);
+        alerta.setPositiveButton("Excluir", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                reference.child("clientes").child(cadastro.getId()).removeValue();
+            }
+        });
+        alerta.show();
     }
 
     protected void onStart(){
@@ -85,6 +113,7 @@ public class PromoActivity extends AppCompatActivity {
                 Cadastro c = new Cadastro();
                 c.setId(snapshot.getKey());
                 c.setNome(snapshot.child("nome").getValue(String.class));
+                c.setTipoTel(snapshot.child("tipoTel").getValue(String.class));
                 c.setTelefone(snapshot.child("telefone").getValue(String.class));
                 c.setTipoEndereco(snapshot.child("tipoEndereco").getValue(TipoEndereco.class));
                 c.setEndereco(snapshot.child("endereco").getValue(String.class));
@@ -106,6 +135,7 @@ public class PromoActivity extends AppCompatActivity {
                 for(Cadastro c : listaCadastro){
                     if(c.getId().equals(idCliente)){
                         c.setNome(snapshot.child("nome").getValue(String.class));
+                        c.setTipoTel(snapshot.child("tipoTel").getValue(String.class));
                         c.setTelefone(snapshot.child("telefone").getValue(String.class));
                         c.setTipoEndereco(snapshot.child("tipoEndereco").getValue(TipoEndereco.class));
                         c.setEndereco(snapshot.child("endereco").getValue(String.class));

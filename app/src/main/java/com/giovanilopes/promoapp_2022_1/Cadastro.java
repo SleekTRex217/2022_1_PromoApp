@@ -2,7 +2,7 @@ package com.giovanilopes.promoapp_2022_1;
 
 public class Cadastro {
 
-    public String id, nome, telefone, endereco, numero, complemento, bairro, cidade, uf;
+    public String id, nome, tipoTel, telefone, endereco, numero, complemento, bairro, cidade, uf;
     public Farmacia farmacia;
     public Mercado mercado;
     public Utilidades utilidades;
@@ -12,10 +12,11 @@ public class Cadastro {
 
     }
 
-    public Cadastro(String nome, String telefone, String endereco, String numero, String complemento,
+    public Cadastro(String nome, String tipoTel, String telefone, String endereco, String numero, String complemento,
                     String bairro, String cidade, String uf, Farmacia farmacia, Mercado mercado,
                     Utilidades utilidades, TipoEndereco tipoEndereco){
         this.nome = nome;
+        this.tipoTel = tipoTel;
         this.telefone = telefone;
         this.endereco = endereco;
         this.numero = numero;
@@ -29,11 +30,12 @@ public class Cadastro {
         this.tipoEndereco = tipoEndereco;
     }
 
-    public Cadastro(String id, String nome, String telefone, String endereco, String numero, String complemento,
+    public Cadastro(String id, String nome, String tipoTel, String telefone, String endereco, String numero, String complemento,
                     String bairro, String cidade, String uf, Farmacia farmacia, Mercado mercado,
                     Utilidades utilidades, TipoEndereco tipoEndereco){
         this.id = id;
         this.nome = nome;
+        this.tipoTel = tipoTel;
         this.telefone = telefone;
         this.endereco = endereco;
         this.numero = numero;
@@ -47,7 +49,8 @@ public class Cadastro {
         this.tipoEndereco = tipoEndereco;
     }
 
-    public String toString() {return nome + "\n" + telefone + "\n" + cidade + " / " + uf;}
+    public String toString() {return nome + "\n" + telefone + "\n" + cidade + " / " + uf + "\n" +
+            "Farmácia: " + farmacia + "\n" + "Mercado: " + mercado + "\n" + "Loja: " + utilidades;}
 
     public String getId() {return id;}
 
@@ -60,6 +63,10 @@ public class Cadastro {
     public String getTelefone() {return telefone;}
 
     public void setTelefone(String telefone) {this.telefone = telefone;}
+
+    public String getTipoTel() {return tipoTel;}
+
+    public void setTipoTel(String tipoTel) {this.tipoTel = tipoTel;}
 
     public String getEndereco() {return endereco;}
 

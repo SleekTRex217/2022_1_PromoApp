@@ -14,9 +14,6 @@
     <string name="txtNomeHintCidade">City</string>
 
     <string name="txAddressType">Select type address</string>
-<!--    <string name="spFarmacia">Select the Pharmacy you want to receive</string>-->
-<!--    <string name="spMercado">Select the Market you want to receive</string>-->
-<!--    <string name="spUtilidades">Select the Utility Store you want to receive</string>-->
 
     <string name="confirmacao">Select below the promotions you would like to receive: </string>
 

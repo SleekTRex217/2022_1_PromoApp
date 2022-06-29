@@ -37,26 +37,11 @@
         android:layout_weight="1"
         android:id="@+id/lvCadastro" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:id="@+id/btnRemover"
-            android:text="@string/btnRemover" />
-
-        <Button
-            android:layout_marginLeft="225dp"
+    <Button
             android:id="@+id/btnAdicionar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_gravity="center_horizontal"
             android:text="@string/btnAdicionar" />
-
-    </LinearLayout>
 
 </LinearLayout>

@@ -49,7 +49,8 @@ public class Cadastro {
         this.tipoEndereco = tipoEndereco;
     }
 
-    public String toString() {return nome + "\n" + telefone + "\n" + cidade + " / " + uf;}
+    public String toString() {return nome + "\n" + telefone + "\n" + cidade + " / " + uf + "\n" +
+            "Farmácia: " + farmacia + "\n" + "Mercado: " + mercado + "\n" + "Loja: " + utilidades;}
 
     public String getId() {return id;}
 

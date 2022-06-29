@@ -2,12 +2,14 @@ package com.giovanilopes.promoapp_2022_1;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,7 +28,7 @@ import java.util.List;
 public class PromoActivity extends AppCompatActivity {
 
     private ListView lvCadastro;
-    private Button btnAdicionar, btnRemover;
+    private Button btnAdicionar;
     private List<Cadastro> listaCadastro = new ArrayList<>();
     private ArrayAdapter adapter;
 
@@ -44,22 +46,12 @@ public class PromoActivity extends AppCompatActivity {
 
         lvCadastro = findViewById(R.id.lvCadastro);
         btnAdicionar = findViewById(R.id.btnAdicionar);
-        btnRemover = findViewById(R.id.btnRemover);
 
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PromoActivity.this, MainActivity.class);
                 intent.putExtra("action", "adicionar");
-                startActivity(intent);
-            }
-        });
-
-        btnRemover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PromoActivity.this, MainActivity.class);
-                intent.putExtra("action", "remover");
                 startActivity(intent);
             }
         });
@@ -83,6 +75,30 @@ public class PromoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        lvCadastro.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                excluir(position);
+                return true;
+            }
+        });
+    }
+
+    private void excluir(int posicao){
+        Cadastro cadastro = listaCadastro.get( posicao );
+        AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+        alerta.setTitle("Exclusão de Cadastro");
+        alerta.setIcon(android.R.drawable.ic_delete);
+        alerta.setMessage("Tem certeza que deseja excluir o cadastro de " + cadastro.getNome() +"?");
+        alerta.setNeutralButton("Cancelar", null);
+        alerta.setPositiveButton("Excluir", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                reference.child("clientes").child(cadastro.getId()).removeValue();
+            }
+        });
+        alerta.show();
     }
 
     protected void onStart(){
